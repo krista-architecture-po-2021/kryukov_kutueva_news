@@ -3,4 +3,5 @@
 .idea/
 out/
 */target/
-kryukov_kutueva_architecture.iml
+target/ ё
+*.iml

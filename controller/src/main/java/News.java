@@ -1,18 +1,24 @@
+import java.util.Date;
 import java.util.Objects;
 
-public class News implements INews {
+public class News{
 
-    private String title,date = "";
+    private String title;
+
+    private Date date;
 
     private String category;
 
-    public News(String newYear, String s) {
+    private String text;
+
+    public News(String title, Date date, String category, String text) {
+        this.title = title;
+        this.date = date;
+        this.category = category;
+        this.text = text;
     }
 
-    @Override
-    public void addNews(String tit,String dt) {
 
-    }
 
     void setTitle(String title){
         this.title = title;
@@ -22,11 +28,11 @@ public class News implements INews {
         return title;
     }
 
-    public void setDate(String date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 
-    public String getDate() {
+    public Date getDate() {
         return date;
     }
 
@@ -36,6 +42,14 @@ public class News implements INews {
 
     public void setCategory(String category) {
         this.category = category;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
     }
 
     @Override
@@ -50,4 +64,5 @@ public class News implements INews {
     public int hashCode() {
         return Objects.hash(title, date);
     }
+
 }

@@ -1,15 +1,14 @@
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class AllCategories implements IAllCategories {
 
     private static volatile AllCategories instance;
 
-    private ArrayList<ICategory> allCategories = new ArrayList<>();
+    private ArrayList<ICategoryInput> allCategories = new ArrayList<>();
 
-    public void setAllCategories(List<ICategory> categories) {
-        allCategories = (ArrayList<ICategory>) categories;
+    public void setAllCategories(List<ICategoryInput> categories) {
+        allCategories = (ArrayList<ICategoryInput>) categories;
     }
 
     private AllCategories() {};
@@ -28,7 +27,7 @@ public class AllCategories implements IAllCategories {
     }
 
     @Override
-    public List<ICategory> getAllCategories() {
+    public List<ICategoryInput> getAllCategories() {
         return allCategories;
     }
 }

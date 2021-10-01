@@ -1,9 +1,9 @@
 import java.util.List;
 
 public interface INewsController {
-    List<INews> getNewsList();
-    INews getNewsItem(int id);
-    void addNewsItem(INews news);
-    void renewNewsItem(int id, INews news);
+    List<DTONewsItem> getNewsList();
+    DTONewsItem getNewsItem(int id);
+    void addNewsItem(INewsInput newsInput);
+    void renewNewsItem(int id, INewsInput newsInput);
     void deleteNewsItem(int id);
 }

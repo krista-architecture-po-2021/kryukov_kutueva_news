@@ -2,6 +2,6 @@ import java.util.List;
 
 public interface IAllCategories {
 
-    List<ICategory> getAllCategories();
+    List<ICategoryInput> getAllCategories();
 
 }

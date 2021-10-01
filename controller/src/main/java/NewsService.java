@@ -6,22 +6,22 @@ public class NewsService implements INewsService {
     ICategoryController categoryController = new CategoryController();
 
     @Override
-    public void addNews(INews news) {
+    public void addNews(INewsInput news) {
         newsController.addNewsItem(news);
     }
 
     @Override
-    public INews getNews(int id) {
+    public DTONewsItem getNews(int id) {
         return newsController.getNewsItem(id);
     }
 
     @Override
-    public List<INews> getNewsList() {
+    public List<DTONewsItem> getNewsList() {
         return newsController.getNewsList();
     }
 
     @Override
-    public void renewNews(int id, INews news) {
+    public void renewNews(int id, INewsInput news) {
         newsController.renewNewsItem(id, news);
     }
 
@@ -31,17 +31,17 @@ public class NewsService implements INewsService {
     }
 
     @Override
-    public List<ICategory> getCategoriesList() {
+    public List<DTOCategory> getCategoriesList() {
         return categoryController.getCategoriesList();
     }
 
     @Override
-    public void addCategory(ICategory category) {
+    public void addCategory(ICategoryInput category) {
         categoryController.addCategory(category);
     }
 
     @Override
-    public void renewCategory(int id, ICategory category) {
+    public void renewCategory(int id, ICategoryInput category) {
         categoryController.renewCategory(id, category);
     }
 

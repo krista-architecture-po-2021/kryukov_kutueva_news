@@ -1,6 +1,6 @@
 import java.util.Objects;
 
-public class Category implements ICategory {
+public class Category implements ICategoryInput {
     private String name;
 
     public Category(String name) {
