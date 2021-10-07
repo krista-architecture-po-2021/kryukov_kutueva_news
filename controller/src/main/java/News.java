@@ -11,14 +11,15 @@ public class News{
 
     private String text;
 
-    public News(String title, Date date, String category, String text) {
-        this.title = title;
+    private String author;
+
+    public News(INewsInput newsInput, Date date) {
+        this.title = newsInput.getTitle();
+        this.category = newsInput.getCategory();
+        this.text = newsInput.getText();
+        this.author = newsInput.getAuthor();
         this.date = date;
-        this.category = category;
-        this.text = text;
     }
-
-
 
     void setTitle(String title){
         this.title = title;
@@ -52,17 +53,11 @@ public class News{
         this.text = text;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        News news = (News) o;
-        return Objects.equals(title, news.title) && Objects.equals(date, news.date);
+    public String getAuthor() {
+        return author;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(title, date);
+    public void setAuthor(String author) {
+        this.author = author;
     }
-
 }

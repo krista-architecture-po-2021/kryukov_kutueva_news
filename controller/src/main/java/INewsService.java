@@ -2,13 +2,13 @@ import java.util.List;
 
 public interface INewsService {
     void addNews(INewsInput news);
-    INewsInput getNews(int id);
-    List<INewsInput> getNewsList();
-    void renewNews(int id, INewsInput news);
+    DtoNewsItem getNews(int id);
+    List<DtoNewsItem> getNewsList();
+    void changeNews(int id, INewsInput news);
     void deleteNews(int id);
 
-    List<ICategoryInput> getCategoriesList();
+    List<DtoCategory> getCategoriesList();
     void addCategory(ICategoryInput category);
-    void renewCategory(int id, ICategoryInput category);
+    void changeCategory(int id, ICategoryInput category);
     void deleteCategory(int id);
 }

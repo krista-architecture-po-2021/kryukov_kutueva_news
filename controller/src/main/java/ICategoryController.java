@@ -1,8 +1,8 @@
 import java.util.List;
 
 public interface ICategoryController {
-    List<DTOCategory> getCategoriesList();
+    List<DtoCategory> getCategoriesList();
     void addCategory(ICategoryInput category);
-    void renewCategory(int id, ICategoryInput category);
+    void changeCategory(int id, ICategoryInput category);
     void deleteCategory(int id);
 }

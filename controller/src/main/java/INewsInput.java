@@ -7,4 +7,6 @@ public interface INewsInput {
     void setCategory(String category);
     String getText();
     void setText(String text);
+    String getAuthor();
+    void setAuthor(String author);
 }

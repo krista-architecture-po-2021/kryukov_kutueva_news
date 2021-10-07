@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class DTOCategoryNewsTitles {
+public class DtoCategoryNewsTitles {
     public String category;
     public ArrayList<String> titles;
 }

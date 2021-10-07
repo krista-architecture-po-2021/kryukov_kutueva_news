@@ -1,19 +1,26 @@
+import java.util.ArrayList;
 import java.util.List;
 
 public class CategoryController implements ICategoryController{
 
     @Override
-    public List<ICategoryInput> getCategoriesList() {
-        return AllCategories.getInstance().getAllCategories();
+    public List<DtoCategory> getCategoriesList() {
+        List<Category> categories = AllCategories.getInstance().getAllCategories();
+        ArrayList<DtoCategory> dtoCategories = new ArrayList<>();
+        for (Category category: categories) {
+            DtoCategory dtoCategory = new DtoCategory(category.getName());
+            dtoCategories.add(dtoCategory);
+        }
+        return dtoCategories;
     }
 
     @Override
     public void addCategory(ICategoryInput category) {
-        //modelCategories.setCategory(category);
+
     }
 
     @Override
-    public void renewCategory(int id, ICategoryInput category) {
+    public void changeCategory(int id, ICategoryInput category) {
 
     }
 

@@ -2,11 +2,13 @@ public class NewsInput implements INewsInput {
     private String title;
     private String category;
     private String text;
+    private String author;
 
-    public NewsInput(String title, String category, String text) {
+    public NewsInput(String title, String category, String text, String author) {
         this.title = title;
         this.category = category;
         this.text = text;
+        this.author = author;
     }
 
     @Override
@@ -32,5 +34,13 @@ public class NewsInput implements INewsInput {
     @Override
     public void setText(String text) {
         this.text = text;
+    }
+    @Override
+    public String getAuthor() {
+        return author;
+    }
+    @Override
+    public void setAuthor(String author) {
+        this.author = author;
     }
 }

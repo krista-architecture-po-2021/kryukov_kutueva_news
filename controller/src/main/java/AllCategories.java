@@ -5,10 +5,10 @@ public class AllCategories implements IAllCategories {
 
     private static volatile AllCategories instance;
 
-    private ArrayList<ICategoryInput> allCategories = new ArrayList<>();
+    private ArrayList<Category> allCategories = new ArrayList<>();
 
-    public void setAllCategories(List<ICategoryInput> categories) {
-        allCategories = (ArrayList<ICategoryInput>) categories;
+    public void setAllCategories(List<Category> categories) {
+        allCategories = (ArrayList<Category>) categories;
     }
 
     private AllCategories() {};
@@ -27,7 +27,7 @@ public class AllCategories implements IAllCategories {
     }
 
     @Override
-    public List<ICategoryInput> getAllCategories() {
+    public List<Category> getAllCategories() {
         return allCategories;
     }
 }

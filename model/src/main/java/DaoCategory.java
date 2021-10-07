@@ -1,28 +1,29 @@
 import java.util.List;
 
-public class DaoCategory implements IDaoCategory {
+public class DaoCategory implements IDao<Category> {
+
     @Override
-    Category getCategory(int id) {
+    public Category get(int id) {
         return null;
     }
 
     @Override
-    List<Category> getAllCategory() {
+    public List<Category> getAll() {
         return null;
     }
 
     @Override
-    void changeCategory(Category category){
+    public void change(int id, Category item) {
 
     }
 
     @Override
-    void addCategory(Category category){
+    public void add(Category item) {
 
     }
 
     @Override
-    void delCategory(Category category){
+    public void del(int id) {
 
     }
 }

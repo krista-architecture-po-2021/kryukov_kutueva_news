@@ -9,16 +9,19 @@ public class TestApi {
     @Test
     public void addNews() {
         INewsService newsService = new NewsService();
-        INewsInput news = new NewsInput("New Year", "Holidays", "Year 2021 has come!");
+        INewsInput news = new NewsInput("New Year", "Holidays", "Year 2021 has come!", "Nataliia Kutueva");
         newsService.addNews(news);
-        News returnedNews = (News) newsService.getNewsList().get(0);
-        assertEquals(news, returnedNews);
+        DtoNewsItem returnedNews = newsService.getNewsList().get(0);
+        assertEquals(news.getTitle(), returnedNews.title);
+        assertEquals(news.getCategory(), returnedNews.category);
+        assertEquals(news.getText(), returnedNews.text);
+        assertEquals(news.getAuthor(), returnedNews.author);
     }
 
     @Test
     public void getNews() {
         INewsService newsService = new NewsService();
-        INewsInput news = new News("NewYear","31.12");
+        INewsInput news = new NewsInput("New Year", "Holidays", "Year 2021 has come!", "Nataliia Kutueva");
         newsService.addNews(news);
         News returnedNews = (News) newsService.getNews(1);
         assertEquals(news, returnedNews);
@@ -30,7 +33,7 @@ public class TestApi {
         INewsInput news1 = new News("NewYear","31.12");
         newsService.addNews(news1);
         INewsInput news2 = new News("NewYear", "01.01");
-        newsService.renewNews(1, news2);
+        newsService.changeNews(1, news2);
         News returnedNews = (News) newsService.getNews(1);
         assertEquals(news2, returnedNews);
     }
@@ -77,7 +80,7 @@ public class TestApi {
         ICategoryInput category1 = new Category("Holidays");
         newsService.addCategory(category1);
         ICategoryInput category2 = new Category("Politics");
-        newsService.renewCategory(1, category2);
+        newsService.changeCategory(1, category2);
         List<ICategoryInput> categoriesList = newsService.getCategoriesList();
         assertFalse(categoriesList.isEmpty());
         ICategoryInput returnedCategory = categoriesList.get(0);
