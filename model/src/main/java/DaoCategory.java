@@ -13,7 +13,7 @@ public class DaoCategory implements IDao<DoCategory> {
     }
 
     @Override
-    public void change(int id, DoCategory item) {
+    public void change(DoCategory item) {
 
     }
 

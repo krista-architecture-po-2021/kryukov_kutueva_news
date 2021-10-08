@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class AllCategories implements IAllCategories {
 
@@ -30,4 +31,11 @@ public class AllCategories implements IAllCategories {
     public List<Category> getAllCategories() {
         return allCategories;
     }
+
+    @Override
+    public int getNextFreeId() {
+        Category lastCategory = allCategories.get(allCategories.size() - 1);
+        return (lastCategory != null) ? (lastCategory.getId() + 1) : 1;
+    }
+
 }

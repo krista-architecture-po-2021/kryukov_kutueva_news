@@ -12,7 +12,7 @@ public class DaoNews implements IDao<DoNews> {
     }
 
     @Override
-    public void change(int id, DoNews news){
+    public void change(DoNews news){
 
     }
 

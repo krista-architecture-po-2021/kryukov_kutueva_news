@@ -5,7 +5,7 @@ public interface IDao <T> {
 
     List<T> getAll();
 
-    void change(int id, T item);
+    void change(T item);
 
     void add(T item);
 

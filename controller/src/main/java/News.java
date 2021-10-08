@@ -3,6 +3,8 @@ import java.util.Objects;
 
 public class News{
 
+    private int id;
+
     private String title;
 
     private Date date;
@@ -13,12 +15,30 @@ public class News{
 
     private String author;
 
-    public News(INewsInput newsInput, Date date) {
+    public News(int id, String title, Date date, String category, String text, String author) {
+        this.id = id;
+        this.title = title;
+        this.date = date;
+        this.category = category;
+        this.text = text;
+        this.author = author;
+    }
+
+    public News(INewsInput newsInput, Date date, int id) {
         this.title = newsInput.getTitle();
         this.category = newsInput.getCategory();
         this.text = newsInput.getText();
         this.author = newsInput.getAuthor();
         this.date = date;
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     void setTitle(String title){
