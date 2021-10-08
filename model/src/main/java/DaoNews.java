@@ -1,23 +1,23 @@
 import java.util.List;
 
-public class DaoNews implements IDao<News> {
+public class DaoNews implements IDao<DoNews> {
     @Override
-    public News get(int id) {
+    public DoNews get(int id) {
         return null;
     }
 
     @Override
-    public List<News> getAll() {
+    public List<DoNews> getAll() {
         return null;
     }
 
     @Override
-    public void change(int id, News news){
+    public void change(int id, DoNews news){
 
     }
 
     @Override
-    public void add(News news){
+    public void add(DoNews news){
 
     }
 
