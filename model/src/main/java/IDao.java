@@ -1,14 +1,13 @@
-import java.io.IOException;
 import java.util.List;
 
 public interface IDao <T> {
-    T get(int id) throws IOException;
+    T get(int id);
 
-    List<T> getAll() throws IOException;
+    List<T> getAll();
 
-    void change(T item) throws IOException;
+    void change(T item);
 
-    void add(T item) throws IOException;
+    void add(T item);
 
-    void del(int id) throws IOException;
+    void del(int id);
 }

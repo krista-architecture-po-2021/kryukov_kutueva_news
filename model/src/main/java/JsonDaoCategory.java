@@ -16,42 +16,51 @@ public class JsonDaoCategory implements IDao<DoCategory> {
         objectMapper = new ObjectMapper();
     }
 
-    public List<DoCategory> readJson() throws IOException {
+    public List<DoCategory> readJson(){
         File file = new File(path);
-        return objectMapper.readValue(file, new TypeReference<List<DoCategory>>(){});
+        try {
+            return objectMapper.readValue(file, new TypeReference<List<DoCategory>>(){});
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
-    public void writeCategory(List<DoCategory> listCategory) throws IOException{
-        FileWriter fileWriter = new FileWriter(path);
+    public void writeCategory(List<DoCategory> listCategory){
+        try {
+            FileWriter fileWriter = new FileWriter(path);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
-    public DoCategory get(int id) throws IOException {
+    public DoCategory get(int id){
         List<DoCategory> listCategory = readJson();
         return listCategory.get(id);
     }
 
     @Override
-    public List<DoCategory> getAll() throws IOException {
+    public List<DoCategory> getAll(){
         return readJson();
     }
 
     @Override
-    public void change(DoCategory item) throws IOException {
+    public void change(DoCategory item){
         List<DoCategory> listCategory = readJson();
         listCategory.set(item.id,item);
         writeCategory(listCategory);
     }
 
     @Override
-    public void add(DoCategory item) throws IOException {
+    public void add(DoCategory item){
         List<DoCategory> listCategory = readJson();
         listCategory.add(item);
         writeCategory(listCategory);
     }
 
     @Override
-    public void del(int id) throws IOException {
+    public void del(int id){
         List<DoCategory> listCategory = readJson();
         listCategory.remove(id);
         writeCategory(listCategory);

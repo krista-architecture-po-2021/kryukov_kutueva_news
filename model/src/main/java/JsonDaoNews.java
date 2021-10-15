@@ -16,42 +16,51 @@ public class JsonDaoNews implements IDao<DoNews> {
         objectMapper = new ObjectMapper();
     }
 
-    public List<DoNews> readJson() throws IOException {
+    public List<DoNews> readJson(){
         File file = new File(path);
-        return objectMapper.readValue(file, new TypeReference<List<DoNews>>(){});
+        try {
+            return objectMapper.readValue(file, new TypeReference<List<DoNews>>(){});
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
-    public void writeNews(List<DoNews> listNews) throws IOException{
-        FileWriter fileWriter = new FileWriter(path);
+    public void writeNews(List<DoNews> listNews){
+        try {
+            FileWriter fileWriter = new FileWriter(path);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
-    public DoNews get(int id) throws IOException {
+    public DoNews get(int id){
         List<DoNews> listNews = readJson();
         return listNews.get(id);
     }
 
     @Override
-    public List<DoNews> getAll() throws IOException {
+    public List<DoNews> getAll(){
         return readJson();
     }
 
     @Override
-    public void change(DoNews news) throws IOException {
+    public void change(DoNews news){
         List<DoNews> listNews = readJson();
         listNews.set(news.id,news);
         writeNews(listNews);
     }
 
     @Override
-    public void add(DoNews news) throws IOException {
+    public void add(DoNews news){
         List<DoNews> listNews = readJson();
         listNews.add(news);
         writeNews(listNews);
     }
 
     @Override
-    public void del(int id) throws IOException {
+    public void del(int id){
         List<DoNews> listNews = readJson();
         listNews.remove(id);
         writeNews(listNews);

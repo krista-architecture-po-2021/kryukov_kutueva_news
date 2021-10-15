@@ -9,4 +9,5 @@ public interface INewsController {
 
     DtoCategoryNewsTitles getNewsByCategory(String category);
     DtoAllAuthors getAllAuthors();
+
 }
