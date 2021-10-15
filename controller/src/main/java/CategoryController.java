@@ -27,7 +27,7 @@ public class CategoryController implements ICategoryController{
     public int addCategory(String name) {
         int newId = getCategoryNextId();
         Category newCategory = new Category(newId, name);
-        DaoCategory daoCategory = model.getDaoCategory();
+        IDao<DoCategory> daoCategory = model.getDaoCategory();
         DoCategory doCategory = new DoCategory(newCategory.getId(), newCategory.getName());
         daoCategory.add(doCategory);
         return newId;
@@ -37,13 +37,13 @@ public class CategoryController implements ICategoryController{
     public void changeCategory(int id, ICategoryInput category) {
         Category newCategory = new Category(id, category.getName());
         DoCategory doCategory = new DoCategory(newCategory.getId(), newCategory.getName());
-        DaoCategory daoCategory = model.getDaoCategory();
+        IDao<DoCategory> daoCategory = model.getDaoCategory();
         daoCategory.change(doCategory);
     }
 
     @Override
     public void deleteCategory(int id) {
-        DaoCategory daoCategory = model.getDaoCategory();
+        IDao<DoCategory> daoCategory = model.getDaoCategory();
         daoCategory.del(id);
     }
 
