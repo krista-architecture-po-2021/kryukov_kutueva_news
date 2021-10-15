@@ -1,7 +1,5 @@
-import java.util.List;
-
 public interface IModel {
-    DaoNews getDaoNews();
-    DaoCategory getDaoCategory();
+    JsonDaoNews getDaoNews();
+    JsonDaoCategory getDaoCategory();
     //List<DaoNews> getDaoNewsByCategory(int categoryId);
 }
