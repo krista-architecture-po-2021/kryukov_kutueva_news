@@ -1,3 +1,5 @@
+import java.util.Objects;
+
 public class DtoNewsItem {
     public int id;
     public String title;

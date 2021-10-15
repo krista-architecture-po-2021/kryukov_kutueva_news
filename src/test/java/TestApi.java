@@ -6,16 +6,24 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class TestApi {
 
+    private void compareNewsInputOutput(INewsInput newsInput, DtoNewsItem newsOutput) {
+        assertEquals(newsInput.getTitle(), newsOutput.title);
+        assertEquals(newsInput.getCategory(), newsOutput.category);
+        assertEquals(newsInput.getText(), newsOutput.text);
+        assertEquals(newsInput.getAuthor(), newsOutput.author);
+    }
+
+    private void compareCategoryInputOutput(ICategoryInput categoryInput, DtoCategory categoryOtput) {
+        assertEquals(categoryInput.getName(), categoryOtput.categoryName);
+    }
+
     @Test
     public void addNews() {
         INewsService newsService = new NewsService();
         INewsInput news = new NewsInput("New Year", "Holidays", "Year 2021 has come!", "Nataliia Kutueva");
         newsService.addNews(news);
         DtoNewsItem returnedNews = newsService.getNewsList().get(0);
-        assertEquals(news.getTitle(), returnedNews.title);
-        assertEquals(news.getCategory(), returnedNews.category);
-        assertEquals(news.getText(), returnedNews.text);
-        assertEquals(news.getAuthor(), returnedNews.author);
+        compareNewsInputOutput(news, returnedNews);
     }
 
     @Test
@@ -23,26 +31,26 @@ public class TestApi {
         INewsService newsService = new NewsService();
         INewsInput news = new NewsInput("New Year", "Holidays", "Year 2021 has come!", "Nataliia Kutueva");
         newsService.addNews(news);
-        News returnedNews = (News) newsService.getNews(1);
-        assertEquals(news, returnedNews);
+        DtoNewsItem returnedNews = newsService.getNews(1);
+        compareNewsInputOutput(news, returnedNews);
     }
 
     @Test
-    public void renewNews() {
+    public void updateNews() {
         INewsService newsService = new NewsService();
-        INewsInput news1 = new News("NewYear","31.12");
+        INewsInput news1 = new NewsInput("Lab5", "Study", "We are depeloping a News Service", "NataliiaKutueva");
         newsService.addNews(news1);
-        INewsInput news2 = new News("NewYear", "01.01");
+        INewsInput news2 = new NewsInput("Lab5", "Job", "We are working", "Nataliia Kututeva");
         newsService.changeNews(1, news2);
-        News returnedNews = (News) newsService.getNews(1);
-        assertEquals(news2, returnedNews);
+        DtoNewsItem returnedNews = newsService.getNews(1);
+        compareNewsInputOutput(news2, returnedNews);
     }
 
     @Test
     public void deleteNews() {
         INewsService newsService = new NewsService();
-        INewsInput news1 = new News("NewYear","31.12");
-        newsService.addNews(news1);
+        INewsInput news = new NewsInput("New Year", "Holidays", "Year 2021 has come!", "Nataliia Kutueva");
+        newsService.addNews(news);
         assertFalse(newsService.getNewsList().isEmpty());
         newsService.deleteNews(1);
         assertTrue(newsService.getNewsList().isEmpty());
@@ -51,65 +59,64 @@ public class TestApi {
     @Test
     public void getNewsList() {
         INewsService newsService = new NewsService();
-        INewsInput news1 = new News("NewYear","31.12");
+        INewsInput news1 = new NewsInput("Lab5", "Study", "We are depeloping a News Service", "NataliiaKutueva");
         newsService.addNews(news1);
-        INewsInput news2 = new News("NewYear", "01.01");
+        INewsInput news2 = new NewsInput("Lab5", "Job", "We are working", "Nataliia Kututeva");
         newsService.addNews(news2);
-        List<INewsInput> newsList = newsService.getNewsList();
+        List<DtoNewsItem> newsList = newsService.getNewsList();
         assertEquals(2, newsList.size());
-        INewsInput returnedNews1 = newsList.get(0);
-        assertEquals(returnedNews1, news1);
-        INewsInput returnedNews2 = newsList.get(1);
-        assertEquals(returnedNews2, news2);
+        DtoNewsItem returnedNews1 = newsList.get(0);
+        compareNewsInputOutput(news1, returnedNews1);
+        DtoNewsItem returnedNews2 = newsList.get(1);
+        compareNewsInputOutput(news2, returnedNews2);
     }
 
     @Test
     public void addCategory() {
         INewsService newsService = new NewsService();
-        ICategoryInput category = new Category("Holidays");
+        ICategoryInput category = new CategoryInput("Holidays");
         newsService.addCategory(category);
-        List<ICategoryInput> categoriesList = newsService.getCategoriesList();
+        List<DtoCategory> categoriesList = newsService.getCategoriesList();
         assertFalse(categoriesList.isEmpty());
-        ICategoryInput returnedCategory = categoriesList.get(0);
-        assertEquals(category, returnedCategory);
+        DtoCategory returnedCategory = categoriesList.get(0);
+        compareCategoryInputOutput(category, returnedCategory);
     }
 
     @Test
-    public void renewCategory() {
+    public void updateCategory() {
         INewsService newsService = new NewsService();
-        ICategoryInput category1 = new Category("Holidays");
+        ICategoryInput category1 = new CategoryInput("Holidays");
         newsService.addCategory(category1);
-        ICategoryInput category2 = new Category("Politics");
+        ICategoryInput category2 = new CategoryInput("Politics");
         newsService.changeCategory(1, category2);
-        List<ICategoryInput> categoriesList = newsService.getCategoriesList();
-        assertFalse(categoriesList.isEmpty());
-        ICategoryInput returnedCategory = categoriesList.get(0);
-        assertEquals(category2, returnedCategory);
+        List<DtoCategory> categoriesList = newsService.getCategoriesList();
+        DtoCategory returnedCategory = categoriesList.get(0);
+        compareCategoryInputOutput(category2, returnedCategory);
     }
 
     @Test
     public void deleteCategory() {
         INewsService newsService = new NewsService();
-        ICategoryInput category1 = new Category("Holidays");
-        List<ICategoryInput> categoriesList = newsService.getCategoriesList();
+        ICategoryInput category1 = new CategoryInput("Holidays");
         newsService.addCategory(category1);
+        List<DtoCategory> categoriesList = newsService.getCategoriesList();
         assertFalse(categoriesList.isEmpty());
         newsService.deleteCategory(1);
-        List<ICategoryInput> categoriesList2 = newsService.getCategoriesList();
+        List<DtoCategory> categoriesList2 = newsService.getCategoriesList();
         assertTrue(categoriesList2.isEmpty());
     }
 
     @Test
-    public void getCategoriesList() {
+    public void getAllCategories() {
         INewsService newsService = new NewsService();
-        ICategoryInput category1 = new Category("Holidays");
+        ICategoryInput category1 = new CategoryInput("Holidays");
         newsService.addCategory(category1);
-        ICategoryInput category2 = new Category("Politics");
+        ICategoryInput category2 = new CategoryInput("Politics");
         newsService.addCategory(category2);
-        List<ICategoryInput> categoriesList = newsService.getCategoriesList();
-        ICategoryInput returnedCategory1 = categoriesList.get(0);
-        assertEquals(category1, returnedCategory1);
-        ICategoryInput returnedCategory2 = categoriesList.get(1);
-        assertEquals(category2, returnedCategory2);
+        List<DtoCategory> categoriesList = newsService.getCategoriesList();
+        DtoCategory returnedCategory1 = categoriesList.get(0);
+        compareCategoryInputOutput(category1, returnedCategory1);
+        DtoCategory returnedCategory2 = categoriesList.get(1);
+        compareCategoryInputOutput(category2, returnedCategory2);
     }
 }
