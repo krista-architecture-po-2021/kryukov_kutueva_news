@@ -1,28 +1,37 @@
 import java.util.List;
 
 public class DaoNews implements IDao<DoNews> {
-    @Override
-    public DoNews get(int id) {
-        return null;
+
+    public static final String NEWS = "news";
+
+    private IProvider provider;
+
+    public DaoNews(IProvider provider) {
+        this.provider = provider;
     }
 
     @Override
-    public List<DoNews> getAll() {
-        return null;
+    public DoNews get(int id) {
+        return provider.get(NEWS, id);
+    }
+
+    @Override
+    public List getAll() {
+        return provider.<DoNews>getAll(NEWS);
     }
 
     @Override
     public void change(DoNews news){
-
+        provider.change(NEWS, news);
     }
 
     @Override
     public void add(DoNews news){
-
+        provider.add(NEWS, news);
     }
 
     @Override
     public void del(int id){
-
+        provider.del(NEWS, id);
     }
 }
