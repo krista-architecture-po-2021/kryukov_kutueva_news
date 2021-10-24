@@ -1,6 +1,6 @@
 import java.util.Objects;
 
-public class Category implements IBaseEntity {
+public class Category {
 
     private int id;
 

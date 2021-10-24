@@ -19,8 +19,8 @@ public class NewsController implements INewsController{
         IDao<DoNews> daoNews = model.getDaoNews();
         DoNews doNews = daoNews.get(id);
         IDao<DoCategory> daoCategory = model.getDaoCategory();
-        DoCategory doCategory = daoCategory.get(doNews.categoryId);
-        News news = new News(doNews.id, doNews.title, doNews.date, doCategory.name, doNews.text, doNews.author);
+        DoCategory doCategory = daoCategory.get(doNews.getCategoryId());
+        News news = new News(doNews.getId(), doNews.getTitle(), doNews.getDate(), doCategory.getName(), doNews.getText(), doNews.getAuthor());
         return new DtoNewsItem(news);
     }
 

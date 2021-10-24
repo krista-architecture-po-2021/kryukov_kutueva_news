@@ -22,7 +22,7 @@ public class FormatProviderJson implements IProvider {
     }
 
     @Override
-    public <T> T get(String entityName, int id) {
+    public <T extends IBaseEntity> T get(String entityName, int id) {
         choosePath(entityName);
         List<T> list = readJson();
         return list.get(id);
@@ -30,7 +30,7 @@ public class FormatProviderJson implements IProvider {
     }
 
     @Override
-    public <T> List<T> getAll(String entityName) {
+    public <T extends IBaseEntity> List<T> getAll(String entityName) {
         choosePath(entityName);
         return readJson();
     }
@@ -46,7 +46,7 @@ public class FormatProviderJson implements IProvider {
     }
 
     @Override
-    public <T> void add(String entityName, T item) {
+    public <T extends IBaseEntity> void add(String entityName, T item) {
 
     }
 

@@ -4,7 +4,6 @@ import org.apache.commons.dbutils.ResultSetHandler;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 
-import javax.sql.DataSource;
 import java.sql.*;
 import java.util.List;
 
@@ -53,7 +52,11 @@ public class DbConnection {
     }
 
     public <T> List<T> getAll(String entityName) {
-        return null;
+        if (NEWS.equals(entityName)) {
+            return (List<T>) getAllNews();
+        } else {
+            return (List<T>) getAllCategories();
+        }
     }
 
     private List<DoCategory> getAllCategories() {
@@ -69,15 +72,28 @@ public class DbConnection {
         return null;
     }
 
-    public <T> void changeCategory(T doCategory) {
+    private List<DoNews> getAllNews() {
+        ResultSetHandler<List<DoNews>> handler = new BeanListHandler<>(DoNews.class);
+        QueryRunner queryRunner = new QueryRunner();
+        DbUtils.loadDriver(JDBC_DRIVER);
+        try (Connection connection = DriverManager.getConnection(DB_URL, user, password)) {
+            String query = "SELECT * FROM news";
+            return queryRunner.query(connection, query, handler);
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public <T> void change(String entityName, T item) {
 
     }
 
-    public void addCategory(DoCategory doCategory) {
+    public <T> void add(String entityName, T item) {
 
     }
 
-    public void delCategory(int id) {
+    public void del(String entityName, int id) {
 
     }
 

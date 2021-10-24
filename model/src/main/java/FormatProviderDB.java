@@ -5,32 +5,27 @@ public class FormatProviderDB implements IProvider{
     public static final String NEWS = "news";
     public static final String CATEGORY = "category";
 
-    @Override
-    public <T> T get(String entityName, int id) {
+    DbConnection dbConnection = new DbConnection();
 
-        }
+    @Override
+    public <T extends IBaseEntity> T get(String entityName, int id) {
         return null;
     }
 
 
     @Override
-    public <T> List<T> getAll(String entityName) {
+    public <T extends IBaseEntity> List<T> getAll(String entityName) {
+        return null;
+    }
+
+    @Override
+    public <T extends IBaseEntity> void change(String entityName, T item) {
 
     }
 
     @Override
-    public <T> void change(String entityName, T item) {
-        if (NEWS.equals(entityName)) {
-            DbConnection dbConnection = new DbConnection();
-            dbConnection.open();
-            dbConnection.changeNews((DoNews) item);
-            dbConnection.close();
-        }
-    }
-
-    @Override
-    public <T> void add(String entityName, T item) {
-
+    public <T extends IBaseEntity> void add(String entityName, T item) {
+        dbConnection.add(entityName, item);
     }
 
     @Override
