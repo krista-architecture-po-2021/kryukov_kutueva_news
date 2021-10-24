@@ -16,7 +16,7 @@ public class DaoNews implements IDao<DoNews> {
     }
 
     @Override
-    public List getAll() {
+    public List<DoNews> getAll() {
         return provider.<DoNews>getAll(NEWS);
     }
 

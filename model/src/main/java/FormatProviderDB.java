@@ -6,19 +6,8 @@ public class FormatProviderDB implements IProvider{
     public static final String CATEGORY = "category";
 
     @Override
-    public Object get(String entityName, int id) {
-        if (NEWS.equals(entityName)) {
-            DbConnection dbConnection = new DbConnection();
-            dbConnection.open();
-            DoNews doNews = dbConnection.getNews(id);
-            dbConnection.close();
-            return doNews;
-        } else if (CATEGORY.equals(entityName)) {
-            DbConnection dbConnection = new DbConnection();
-            dbConnection.open();
-            DoCategory doCategory = dbConnection.getCategory(id);
-            dbConnection.close();
-            return doCategory;
+    public <T> T get(String entityName, int id) {
+
         }
         return null;
     }
@@ -26,19 +15,7 @@ public class FormatProviderDB implements IProvider{
 
     @Override
     public <T> List<T> getAll(String entityName) {
-        if (NEWS.equals(entityName)) {
-            DbConnection dbConnection = new DbConnection();
-            dbConnection.open();
-            List<T> newsList = dbConnection.getAllNews();
-            dbConnection.close();
-            return newsList;
-        } //else (CATEGORY.equals(entityName)) {
-            DbConnection dbConnection = new DbConnection();
-            dbConnection.open();
-            List<T> categoryList = dbConnection.getAllCategories();
-            dbConnection.close();
-            return categoryList;
-        //}
+
     }
 
     @Override

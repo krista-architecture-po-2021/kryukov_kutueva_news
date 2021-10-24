@@ -1,41 +1,75 @@
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import org.apache.commons.dbutils.DbUtils;
+import org.apache.commons.dbutils.QueryRunner;
+import org.apache.commons.dbutils.ResultSetHandler;
+import org.apache.commons.dbutils.handlers.BeanHandler;
+import org.apache.commons.dbutils.handlers.BeanListHandler;
+
+import javax.sql.DataSource;
+import java.sql.*;
 import java.util.List;
 
 public class DbConnection {
 
-    private static final String url = "jdbc:mysql://localhost:3306/test";
+    public static final String NEWS = "news";
+    public static final String CATEGORY = "category";
+
     private static final String user = "root";
     private static final String password = "root";
 
-    private static Connection connection;
+    static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
+    static final String DB_URL = "jdbc:mysql://localhost:3306/newsservice";
 
-    public void open() {
-        try (Connection connection1 = connection = DriverManager.getConnection(url, user, password)) {
-    } catch (SQLException throwables) {
-            throwables.printStackTrace();
+    public <T> T get(String entityName, int id) {
+        if (NEWS.equals(entityName)) {
+            return (T) getNews(id);
         }
+        return (T) getCategory(id);
     }
 
-    public void close() {
-        try {
-            connection.close();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+    private DoNews getNews(int id) {
+        ResultSetHandler<DoNews> handler = new BeanHandler<>(DoNews.class);
+        QueryRunner queryRunner = new QueryRunner();
+        DbUtils.loadDriver(JDBC_DRIVER);
+        try (Connection connection = DriverManager.getConnection(DB_URL, user, password);) {
+            String query = "SELECT * FROM news WHERE id = ?";
+            return queryRunner.query(connection, query, handler, id);
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-    }
-
-    public DoCategory getCategory(int id) {
         return null;
     }
 
-    public <T> List<T> getAllCategories() {
+    private DoCategory getCategory(int id) {
+        ResultSetHandler<DoCategory> handler = new BeanHandler<>(DoCategory.class);
+        QueryRunner queryRunner = new QueryRunner();
+        DbUtils.loadDriver(JDBC_DRIVER);
+        try (Connection connection = DriverManager.getConnection(DB_URL, user, password)) {
+            String query = "SELECT * FROM categories WHERE id = ?";
+            return queryRunner.query(connection, query, handler, id);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return null;
     }
 
-    public void changeCategory(DoCategory doCategory) {
+    public <T> List<T> getAll(String entityName) {
+        return null;
+    }
+
+    private List<DoCategory> getAllCategories() {
+        ResultSetHandler<List<DoCategory>> handler = new BeanListHandler<>(DoCategory.class);
+        QueryRunner queryRunner = new QueryRunner();
+        DbUtils.loadDriver(JDBC_DRIVER);
+        try (Connection connection = DriverManager.getConnection(DB_URL, user, password)) {
+            String query = "SELECT * FROM categories";
+            return queryRunner.query(connection, query, handler);
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public <T> void changeCategory(T doCategory) {
 
     }
 
@@ -47,23 +81,4 @@ public class DbConnection {
 
     }
 
-    public DoNews getNews(int id) {
-        return null;
-    }
-
-    public List getAllNews() {
-        return null;
-    }
-
-    public void changeNews(DoNews doNews) {
-
-    }
-
-    public void addNews(DoNews doNews) {
-
-    }
-
-    public void delNews(int id) {
-
-    }
 }

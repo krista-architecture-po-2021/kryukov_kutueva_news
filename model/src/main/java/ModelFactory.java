@@ -9,8 +9,6 @@ public abstract class ModelFactory {
     public  abstract DaoCategory getCategoryDao(int value);
 
     public static ModelFactory getModel(int value){
-        if (value == JSON)
-            return new JsonModel();
-        return new DbModel();
+        return new FormatModel();
     }
 }
