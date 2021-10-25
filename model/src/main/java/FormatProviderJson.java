@@ -55,6 +55,11 @@ public class FormatProviderJson implements IProvider {
 
     }
 
+    @Override
+    public List<Integer> getAllIds(String entityName) {
+        return null;
+    }
+
     public <T> List<T> readJson(){
         File file = new File(path);
         try {

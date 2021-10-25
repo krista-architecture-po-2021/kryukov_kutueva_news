@@ -10,4 +10,6 @@ public interface IProvider {
     <T extends IBaseEntity> void add(String entityName, T item);
 
     void del(String entityName, int id);
+
+    List<Integer> getAllIds(String entityName);
 }

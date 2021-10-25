@@ -29,9 +29,9 @@ public class TestApi {
     @Test
     public void getNews() {
         INewsService newsService = new NewsService();
-        INewsInput news = new NewsInput("New Year", "Holidays", "Year 2021 has come!", "Nataliia Kutueva");
+        INewsInput news = new NewsInput("New Year2", "Holidays", "Year 2021 has come again!", "Nataliia Kutueva");
         newsService.addNews(news);
-        DtoNewsItem returnedNews = newsService.getNews(1);
+        DtoNewsItem returnedNews = newsService.getNews(2);
         compareNewsInputOutput(news, returnedNews);
     }
 
@@ -41,8 +41,8 @@ public class TestApi {
         INewsInput news1 = new NewsInput("Lab5", "Study", "We are depeloping a News Service", "NataliiaKutueva");
         newsService.addNews(news1);
         INewsInput news2 = new NewsInput("Lab5", "Job", "We are working", "Nataliia Kututeva");
-        newsService.changeNews(1, news2);
-        DtoNewsItem returnedNews = newsService.getNews(1);
+        newsService.changeNews(3, news2);
+        DtoNewsItem returnedNews = newsService.getNews(3);
         compareNewsInputOutput(news2, returnedNews);
     }
 
@@ -74,23 +74,23 @@ public class TestApi {
     @Test
     public void addCategory() {
         INewsService newsService = new NewsService();
-        ICategoryInput category = new CategoryInput("Holidays");
+        ICategoryInput category = new CategoryInput("Holidays2");
         newsService.addCategory(category);
         List<DtoCategory> categoriesList = newsService.getCategoriesList();
         assertFalse(categoriesList.isEmpty());
-        DtoCategory returnedCategory = categoriesList.get(0);
+        DtoCategory returnedCategory = categoriesList.get(1);
         compareCategoryInputOutput(category, returnedCategory);
     }
 
     @Test
     public void updateCategory() {
         INewsService newsService = new NewsService();
-        ICategoryInput category1 = new CategoryInput("Holidays");
+        ICategoryInput category1 = new CategoryInput("Holidays5");
         newsService.addCategory(category1);
         ICategoryInput category2 = new CategoryInput("Politics");
-        newsService.changeCategory(1, category2);
+        newsService.changeCategory(5, category2);
         List<DtoCategory> categoriesList = newsService.getCategoriesList();
-        DtoCategory returnedCategory = categoriesList.get(0);
+        DtoCategory returnedCategory = categoriesList.get(4);
         compareCategoryInputOutput(category2, returnedCategory);
     }
 

@@ -21,6 +21,14 @@ public class AllCategories implements IAllCategories {
                 localInstance = instance;
                 if (localInstance == null) {
                     instance = localInstance = new AllCategories();
+                    DaoCategory daoCategory = ModelFactory.getModel().getDaoCategory(1);
+                    List<DoCategory> doCategories = daoCategory.getAll();
+                    List<Category> categories = new ArrayList<>();
+                    for (DoCategory doCat: doCategories) {
+                        Category category = new Category(doCat.getId(), doCat.getName());
+                        categories.add(category);
+                    }
+                    instance.setAllCategories(categories);
                 }
             }
         }
@@ -34,8 +42,12 @@ public class AllCategories implements IAllCategories {
 
     @Override
     public int getNextFreeId() {
-        Category lastCategory = allCategories.get(allCategories.size() - 1);
-        return (lastCategory != null) ? (lastCategory.getId() + 1) : 1;
+        for (int i = 1; i <= allCategories.size(); i ++) {
+            if (i != allCategories.get(i - 1).getId()) {
+                return i;
+            }
+        }
+        return allCategories.size() + 1;
     }
 
 }

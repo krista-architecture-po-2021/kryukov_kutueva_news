@@ -10,4 +10,6 @@ public interface IDao <T> {
     void add(T item);
 
     void del(int id);
+
+    List<Integer> getAllIds();
 }

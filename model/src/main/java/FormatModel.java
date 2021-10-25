@@ -13,7 +13,7 @@ public class FormatModel extends ModelFactory{
     }
 
     @Override
-    public DaoCategory getCategoryDao(int value) {
+    public DaoCategory getDaoCategory(int value) {
         if (value == 1) {
             provider = new FormatProviderDB();
         } else {

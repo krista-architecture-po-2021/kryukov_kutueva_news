@@ -2,7 +2,7 @@ import java.util.List;
 
 public class DaoCategory implements IDao<DoCategory> {
 
-    public static final String CATEGORY = "category";
+    public static final String CATEGORY = "categories";
 
     private IProvider provider;
 
@@ -34,4 +34,10 @@ public class DaoCategory implements IDao<DoCategory> {
     public void del(int id) {
         provider.del(CATEGORY, id);
     }
+
+    @Override
+    public List<Integer> getAllIds() {
+        return provider.getAllIds(CATEGORY);
+    }
+
 }

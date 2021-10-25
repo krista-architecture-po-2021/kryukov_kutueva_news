@@ -17,7 +17,7 @@ public class DaoNews implements IDao<DoNews> {
 
     @Override
     public List<DoNews> getAll() {
-        return provider.<DoNews>getAll(NEWS);
+        return provider.getAll(NEWS);
     }
 
     @Override
@@ -33,5 +33,10 @@ public class DaoNews implements IDao<DoNews> {
     @Override
     public void del(int id){
         provider.del(NEWS, id);
+    }
+
+    @Override
+    public List<Integer> getAllIds() {
+        return provider.getAllIds(NEWS);
     }
 }

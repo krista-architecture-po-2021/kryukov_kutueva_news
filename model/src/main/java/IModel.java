@@ -1,5 +1,5 @@
 public interface IModel {
-    JsonDaoNews getDaoNews();
-    JsonDaoCategory getDaoCategory();
+    IDao getDaoNews();
+    IDao getDaoCategory();
     //List<DaoNews> getDaoNewsByCategory(int categoryId);
 }

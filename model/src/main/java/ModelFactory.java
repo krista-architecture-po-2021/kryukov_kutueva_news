@@ -6,9 +6,9 @@ public abstract class ModelFactory {
 //    public  abstract IDao getCategoryDao();
 
     public abstract DaoNews getDaoNews(int value);
-    public  abstract DaoCategory getCategoryDao(int value);
+    public  abstract DaoCategory getDaoCategory(int value);
 
-    public static ModelFactory getModel(int value){
+    public static ModelFactory getModel(){
         return new FormatModel();
     }
 }

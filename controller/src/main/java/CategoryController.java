@@ -4,8 +4,8 @@ import java.util.List;
 
 public class CategoryController implements ICategoryController{
 
-    @Inject
-    IModel model;
+    /*@Inject
+    IModel model;*/
 
     @Override
     public List<DtoCategory> getCategoriesList() {
@@ -27,9 +27,10 @@ public class CategoryController implements ICategoryController{
     public int addCategory(String name) {
         int newId = getCategoryNextId();
         Category newCategory = new Category(newId, name);
-        IDao<DoCategory> daoCategory = model.getDaoCategory();
+        DaoCategory daoCategory = ModelFactory.getModel().getDaoCategory(1);
         DoCategory doCategory = new DoCategory(newCategory.getId(), newCategory.getName());
         daoCategory.add(doCategory);
+        updateCategoryCache(daoCategory);
         return newId;
     }
 
@@ -37,17 +38,29 @@ public class CategoryController implements ICategoryController{
     public void changeCategory(int id, ICategoryInput category) {
         Category newCategory = new Category(id, category.getName());
         DoCategory doCategory = new DoCategory(newCategory.getId(), newCategory.getName());
-        IDao<DoCategory> daoCategory = model.getDaoCategory();
+        DaoCategory daoCategory = ModelFactory.getModel().getDaoCategory(1);
         daoCategory.change(doCategory);
+        updateCategoryCache(daoCategory);
     }
 
     @Override
     public void deleteCategory(int id) {
-        IDao<DoCategory> daoCategory = model.getDaoCategory();
+        DaoCategory daoCategory = ModelFactory.getModel().getDaoCategory(1);
         daoCategory.del(id);
+        updateCategoryCache(daoCategory);
     }
 
     public static int getCategoryNextId() {
         return AllCategories.getInstance().getNextFreeId();
+    }
+
+    private void updateCategoryCache(DaoCategory daoCategory) {
+        List<DoCategory> doCategories = daoCategory.getAll();
+        List<Category> categories = new ArrayList<>();
+        for (DoCategory doCat: doCategories) {
+            Category category = new Category(doCat.getId(), doCat.getName());
+            categories.add(category);
+        }
+        AllCategories.getInstance().setAllCategories(categories);
     }
 }

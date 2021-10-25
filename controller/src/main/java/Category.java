@@ -1,6 +1,4 @@
-import java.util.Objects;
-
-public class Category {
+public class Category{
 
     private int id;
 

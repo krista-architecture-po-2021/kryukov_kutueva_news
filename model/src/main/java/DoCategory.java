@@ -4,6 +4,9 @@ public class DoCategory implements IBaseEntity{
 
     private String name;
 
+    public DoCategory() {
+    }
+
     public DoCategory(int id, String name) {
         this.id = id;
         this.name = name;

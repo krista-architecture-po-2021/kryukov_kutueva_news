@@ -14,6 +14,9 @@ public class DoNews implements IBaseEntity{
 
     private String author;
 
+    public DoNews() {
+    }
+
     public DoNews(int id, String title, Date date, int categoryId, String text, String author) {
         this.id = id;
         this.title = title;
