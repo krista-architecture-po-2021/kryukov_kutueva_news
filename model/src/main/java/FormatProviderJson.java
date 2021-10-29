@@ -1,10 +1,10 @@
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import java.awt.*;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class FormatProviderJson implements IProvider {
@@ -39,25 +39,35 @@ public class FormatProviderJson implements IProvider {
     public <T extends IBaseEntity> void change(String entityName, T item) {
         choosePath(entityName);
         List<T> list = readJson();
-
         list.set(item.getId(),item);
-
-
+        writeList(list);
     }
 
     @Override
     public <T extends IBaseEntity> void add(String entityName, T item) {
-
+        choosePath(entityName);
+        List<T> list = readJson();
+        list.add(item);
+        writeList(list);
     }
 
     @Override
-    public void del(String entityName, int id) {
-
+    public <T extends IBaseEntity> void del(String entityName, int id) {
+        choosePath(entityName);
+        List<T> list = readJson();
+        list.remove(id);
+        writeList(list);
     }
 
     @Override
-    public List<Integer> getAllIds(String entityName) {
-        return null;
+    public <T extends IBaseEntity> List<Integer> getAllIds(String entityName) {
+        choosePath(entityName);
+        List<T> list = readJson();
+        List <Integer> idList = new ArrayList<>();
+        for(int i = 0;i<list.size();i++){
+            idList.add(list.get(i).getId());
+        }
+        return idList;
     }
 
     public <T> List<T> readJson(){
@@ -70,9 +80,10 @@ public class FormatProviderJson implements IProvider {
         return null;
     }
 
-    public <T> void writeNews(List<T> list){
+    public <T> void writeList(List<T> list){
         try {
             FileWriter fileWriter = new FileWriter(path);
+            fileWriter.write(objectMapper.writeValueAsString(list));
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -9,7 +9,7 @@ public interface IProvider {
 
     <T extends IBaseEntity> void add(String entityName, T item);
 
-    void del(String entityName, int id);
+    <T extends IBaseEntity> void del(String entityName, int id);
 
-    List<Integer> getAllIds(String entityName);
+    <T extends IBaseEntity> List<Integer> getAllIds(String entityName);
 }
