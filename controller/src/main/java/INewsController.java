@@ -7,7 +7,6 @@ public interface INewsController {
     void changeNewsItem(int id, INewsInput newsInput);
     void deleteNewsItem(int id);
 
-    DtoCategoryNewsTitles getNewsByCategory(String category);
-    DtoAllAuthors getAllAuthors();
+    List<DtoNewsItem> getNewsByCategory(String category);
 
 }

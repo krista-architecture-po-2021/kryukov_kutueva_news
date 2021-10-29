@@ -1,9 +1,34 @@
+import java.util.Date;
 import java.util.List;
 
 public class NewsService implements INewsService {
 
-    INewsController newsController = new NewsController();
+    INewsController newsController;
     ICategoryController categoryController = new CategoryController();
+
+    String[] sadWords;
+    String[] selectedAuthors;
+    Date publicationDate;
+
+    public NewsService(String[] sadWords, String[] selectedAuthors, Date publicationDate) {
+        this.sadWords = sadWords;
+        this.selectedAuthors = selectedAuthors;
+        this.publicationDate = publicationDate;
+        getNewsController();
+    }
+
+    private void getNewsController() {
+        newsController = new NewsController();
+        if (sadWords != null) {
+            newsController = new PositiveNewsController(newsController, sadWords);
+        }
+        if (selectedAuthors != null) {
+            newsController = new SelectedAuthorsNewsController(newsController, selectedAuthors);
+        }
+        if (publicationDate != null) {
+            newsController = new RecentNewsController(newsController, publicationDate);
+        }
+    }
 
     @Override
     public void addNews(INewsInput news) {

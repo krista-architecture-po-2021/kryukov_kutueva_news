@@ -19,7 +19,7 @@ public class TestApi {
 
     @Test
     public void addNews() {
-        INewsService newsService = new NewsService();
+        INewsService newsService = new NewsService(null, null, null);
         INewsInput news = new NewsInput("New Year", "Holidays", "Year 2021 has come!", "Nataliia Kutueva");
         newsService.addNews(news);
         DtoNewsItem returnedNews = newsService.getNewsList().get(0);
@@ -28,16 +28,16 @@ public class TestApi {
 
     @Test
     public void getNews() {
-        INewsService newsService = new NewsService();
+        INewsService newsService = new NewsService(null, null, null);
         INewsInput news = new NewsInput("New Year2", "Holidays", "Year 2021 has come again!", "Nataliia Kutueva");
         newsService.addNews(news);
-        DtoNewsItem returnedNews = newsService.getNews(2);
+        DtoNewsItem returnedNews = newsService.getNews(1);
         compareNewsInputOutput(news, returnedNews);
     }
 
     @Test
     public void updateNews() {
-        INewsService newsService = new NewsService();
+        INewsService newsService = new NewsService(null, null, null);
         INewsInput news1 = new NewsInput("Lab5", "Study", "We are depeloping a News Service", "NataliiaKutueva");
         newsService.addNews(news1);
         INewsInput news2 = new NewsInput("Lab5", "Job", "We are working", "Nataliia Kututeva");
@@ -48,7 +48,7 @@ public class TestApi {
 
     @Test
     public void deleteNews() {
-        INewsService newsService = new NewsService();
+        INewsService newsService = new NewsService(null, null, null);
         INewsInput news = new NewsInput("New Year", "Holidays", "Year 2021 has come!", "Nataliia Kutueva");
         newsService.addNews(news);
         assertFalse(newsService.getNewsList().isEmpty());
@@ -58,7 +58,7 @@ public class TestApi {
 
     @Test
     public void getNewsList() {
-        INewsService newsService = new NewsService();
+        INewsService newsService = new NewsService(null, null, null);
         INewsInput news1 = new NewsInput("Lab5", "Study", "We are depeloping a News Service", "NataliiaKutueva");
         newsService.addNews(news1);
         INewsInput news2 = new NewsInput("Lab5", "Job", "We are working", "Nataliia Kututeva");
@@ -73,7 +73,7 @@ public class TestApi {
 
     @Test
     public void addCategory() {
-        INewsService newsService = new NewsService();
+        INewsService newsService = new NewsService(null, null, null);
         ICategoryInput category = new CategoryInput("Holidays2");
         newsService.addCategory(category);
         List<DtoCategory> categoriesList = newsService.getCategoriesList();
@@ -84,7 +84,7 @@ public class TestApi {
 
     @Test
     public void updateCategory() {
-        INewsService newsService = new NewsService();
+        INewsService newsService = new NewsService(null, null, null);
         ICategoryInput category1 = new CategoryInput("Holidays5");
         newsService.addCategory(category1);
         ICategoryInput category2 = new CategoryInput("Politics");
@@ -96,7 +96,7 @@ public class TestApi {
 
     @Test
     public void deleteCategory() {
-        INewsService newsService = new NewsService();
+        INewsService newsService = new NewsService(null, null, null);
         ICategoryInput category1 = new CategoryInput("Holidays");
         newsService.addCategory(category1);
         List<DtoCategory> categoriesList = newsService.getCategoriesList();
@@ -108,7 +108,7 @@ public class TestApi {
 
     @Test
     public void getAllCategories() {
-        INewsService newsService = new NewsService();
+        INewsService newsService = new NewsService(null, null, null);
         ICategoryInput category1 = new CategoryInput("Holidays");
         newsService.addCategory(category1);
         ICategoryInput category2 = new CategoryInput("Politics");

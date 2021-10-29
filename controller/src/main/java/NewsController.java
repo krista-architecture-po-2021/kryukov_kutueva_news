@@ -1,6 +1,5 @@
 import javax.inject.Inject;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -61,13 +60,15 @@ public class NewsController implements INewsController{
     }
 
     @Override
-    public DtoCategoryNewsTitles getNewsByCategory(String category) {
-        return null;
-    }
-
-    @Override
-    public DtoAllAuthors getAllAuthors() {
-        return null;
+    public List<DtoNewsItem> getNewsByCategory(String category) {
+        ArrayList<DtoNewsItem> filteredNews = new ArrayList<>();
+        List<DtoNewsItem> allNews = getAllNews();
+        for (DtoNewsItem newsItem: allNews) {
+            if (category.equals(newsItem.category)) {
+                filteredNews.add(newsItem);
+            }
+        }
+        return filteredNews;
     }
 
     public static int getNewsNextId() {
