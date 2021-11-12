@@ -13,6 +13,7 @@
         <module>model</module>
         <module>controller</module>
         <module>provider</module>
+        <module>view</module>
     </modules>
     <dependencies>
         <dependency>

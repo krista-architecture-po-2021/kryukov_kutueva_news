@@ -119,4 +119,25 @@ public class TestApi {
         DtoCategory returnedCategory2 = categoriesList.get(1);
         compareCategoryInputOutput(category2, returnedCategory2);
     }
+
+    @Test
+    public void getPositiveNews() {
+        String[] sadWords = new String[3];
+        sadWords[0] = "coronavirus";
+        sadWords[1] = "disease";
+        sadWords[2] = "death";
+        INewsService newsService = new NewsService(sadWords, null, null);
+        INewsInput news1 = new NewsInput("New Year", "Holidays", "Year 2021 has come!", "Nataliia Kutueva");
+        INewsInput news2 = new NewsInput("Covid", "Problems", "Russia has reported a record 1,159 deaths from Covid in the past 24 hours.", "Nataliia Kutueva");
+        INewsInput news3 = new NewsInput("Covid", "Problems",
+                "More than 230 million people have been sickened and more than 4 million have died of the coronavirus since January 2020", "Nataliia Kutueva");
+        INewsInput news4 = new NewsInput("Covid", "Problems", "Covid is a serious disease", "Nataliia Kutueva");
+        newsService.addNews(news1);
+        newsService.addNews(news2);
+        newsService.addNews(news3);
+        newsService.addNews(news4);
+        List<DtoNewsItem> returnedNews = newsService.getNewsList();
+        assertEquals(1, returnedNews.size());
+        compareNewsInputOutput(news1, returnedNews.get(0));
+    }
 }

@@ -10,11 +10,12 @@ public class NewsController implements INewsController{
 
     @Override
     public List<DtoNewsItem> getAllNews() {
-        IDao<DoNews> daoNews = ModelFactory.getModel().getDaoNews(1);
+        IDao<DoNews> daoNews = ModelFactory.getModel().getDaoNews(NewsService.CONTROLLER);
         List<DoNews> doNewsList = daoNews.getAll();
+        System.out.println(doNewsList.size());
         List<DtoNewsItem> dtoNewsItems = new ArrayList<>();
         for (DoNews doNews: doNewsList) {
-            IDao<DoCategory> daoCategory = ModelFactory.getModel().getDaoCategory(1);
+            IDao<DoCategory> daoCategory = ModelFactory.getModel().getDaoCategory(NewsService.CONTROLLER);
             DoCategory doCategory = daoCategory.get(doNews.getCategoryId());
             News news = new News(doNews.getId(), doNews.getTitle(), doNews.getDate(), doCategory.getName(), doNews.getText(), doNews.getAuthor());
             DtoNewsItem dtoNewsItem = new DtoNewsItem(news);
@@ -25,9 +26,9 @@ public class NewsController implements INewsController{
 
     @Override
     public DtoNewsItem getNewsItem(int id) {
-        IDao<DoNews> daoNews = ModelFactory.getModel().getDaoNews(1);
+        IDao<DoNews> daoNews = ModelFactory.getModel().getDaoNews(NewsService.CONTROLLER);
         DoNews doNews = daoNews.get(id);
-        IDao<DoCategory> daoCategory = ModelFactory.getModel().getDaoCategory(1);
+        IDao<DoCategory> daoCategory = ModelFactory.getModel().getDaoCategory(NewsService.CONTROLLER);
         DoCategory doCategory = daoCategory.get(doNews.getCategoryId());
         News news = new News(doNews.getId(), doNews.getTitle(), doNews.getDate(), doCategory.getName(), doNews.getText(), doNews.getAuthor());
         return new DtoNewsItem(news);
@@ -39,13 +40,13 @@ public class NewsController implements INewsController{
        int categoryId = getCategoryIdByName(news.getCategory());
        DoNews doNews = new DoNews(news.getId(), news.getTitle(), news.getDate(),
                categoryId, news.getText(), news.getAuthor());
-        IDao<DoNews> daoNews = ModelFactory.getModel().getDaoNews(1);
+        IDao<DoNews> daoNews = ModelFactory.getModel().getDaoNews(NewsService.CONTROLLER);
        daoNews.add(doNews);
     }
 
     @Override
     public void changeNewsItem(int id, INewsInput newsInput) {
-        IDao<DoNews> daoNews = ModelFactory.getModel().getDaoNews(1);
+        IDao<DoNews> daoNews = ModelFactory.getModel().getDaoNews(NewsService.CONTROLLER);
         News news = new News(newsInput, new Date(), id);
         int categoryId = getCategoryIdByName(news.getCategory());
         DoNews doNews = new DoNews(news.getId(), news.getTitle(), news.getDate(),
@@ -55,7 +56,7 @@ public class NewsController implements INewsController{
 
     @Override
     public void deleteNewsItem(int id) {
-        IDao<DoNews> daoNews = ModelFactory.getModel().getDaoNews(1);
+        IDao<DoNews> daoNews = ModelFactory.getModel().getDaoNews(NewsService.CONTROLLER);
         daoNews.del(id);
     }
 
@@ -72,7 +73,7 @@ public class NewsController implements INewsController{
     }
 
     public static int getNewsNextId() {
-        IDao<DoNews> daoNews = ModelFactory.getModel().getDaoNews(1);
+        IDao<DoNews> daoNews = ModelFactory.getModel().getDaoNews(NewsService.CONTROLLER);
         List<Integer> usedIds = daoNews.getAllIds();
         for (int i = 1; i <= usedIds.size(); i++) {
             if (usedIds.get(i - 1) != i) {

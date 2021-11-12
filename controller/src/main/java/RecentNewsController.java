@@ -20,7 +20,7 @@ public class RecentNewsController extends NewsControllerDecorator {
     private List<DtoNewsItem> filter(List<DtoNewsItem> allNews) {
         ArrayList<DtoNewsItem> filteredNews = new ArrayList<>();
         for (DtoNewsItem dtoNewsItem: allNews) {
-            if (dtoNewsItem.date.equals(publicationDate) || dtoNewsItem.date.after(publicationDate)) {
+            if (dtoNewsItem.date.equals(publicationDate) || dtoNewsItem.date.before(publicationDate)) {
                 filteredNews.add(dtoNewsItem);
             }
         }

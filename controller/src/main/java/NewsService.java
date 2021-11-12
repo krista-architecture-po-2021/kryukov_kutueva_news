@@ -10,6 +10,8 @@ public class NewsService implements INewsService {
     String[] selectedAuthors;
     Date publicationDate;
 
+    public static final int CONTROLLER = 1;
+
     public NewsService(String[] sadWords, String[] selectedAuthors, Date publicationDate) {
         this.sadWords = sadWords;
         this.selectedAuthors = selectedAuthors;

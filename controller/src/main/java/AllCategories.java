@@ -21,7 +21,7 @@ public class AllCategories implements IAllCategories {
                 localInstance = instance;
                 if (localInstance == null) {
                     instance = localInstance = new AllCategories();
-                    DaoCategory daoCategory = ModelFactory.getModel().getDaoCategory(1);
+                    DaoCategory daoCategory = ModelFactory.getModel().getDaoCategory(NewsService.CONTROLLER);
                     List<DoCategory> doCategories = daoCategory.getAll();
                     List<Category> categories = new ArrayList<>();
                     for (DoCategory doCat: doCategories) {

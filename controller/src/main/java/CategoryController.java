@@ -27,7 +27,7 @@ public class CategoryController implements ICategoryController{
     public int addCategory(String name) {
         int newId = getCategoryNextId();
         Category newCategory = new Category(newId, name);
-        DaoCategory daoCategory = ModelFactory.getModel().getDaoCategory(1);
+        DaoCategory daoCategory = ModelFactory.getModel().getDaoCategory(NewsService.CONTROLLER);
         DoCategory doCategory = new DoCategory(newCategory.getId(), newCategory.getName());
         daoCategory.add(doCategory);
         updateCategoryCache(daoCategory);
@@ -38,14 +38,14 @@ public class CategoryController implements ICategoryController{
     public void changeCategory(int id, ICategoryInput category) {
         Category newCategory = new Category(id, category.getName());
         DoCategory doCategory = new DoCategory(newCategory.getId(), newCategory.getName());
-        DaoCategory daoCategory = ModelFactory.getModel().getDaoCategory(1);
+        DaoCategory daoCategory = ModelFactory.getModel().getDaoCategory(NewsService.CONTROLLER);
         daoCategory.change(doCategory);
         updateCategoryCache(daoCategory);
     }
 
     @Override
     public void deleteCategory(int id) {
-        DaoCategory daoCategory = ModelFactory.getModel().getDaoCategory(1);
+        DaoCategory daoCategory = ModelFactory.getModel().getDaoCategory(NewsService.CONTROLLER);
         daoCategory.del(id);
         updateCategoryCache(daoCategory);
     }
